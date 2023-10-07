@@ -13,7 +13,7 @@ func computeMarsYears(earthYears int) int {
 }
 
 func main() {
-	myAge := 25
+	myAge := 33
 
 	// Call `marsYear` with `myAge`
 	myMartianAge := computeMarsYears(myAge)

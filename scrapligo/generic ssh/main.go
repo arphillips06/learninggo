@@ -9,10 +9,10 @@ import (
 
 func main() {
 	d, err := generic.NewDriver(
-		"192.168.69.116",
+		"192.168.69.230",
 		options.WithAuthNoStrictKey(),
-		options.WithAuthUsername("adamp"),
-		options.WithAuthPassword("adamp123"),
+		options.WithAuthUsername("lab"),
+		options.WithAuthPassword("lab123"),
 		options.WithPort(22),
 		options.WithTransportType("standard"),
 	)
