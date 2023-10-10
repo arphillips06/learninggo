@@ -9,15 +9,16 @@ import (
 
 func main() {
 
-	GET_CONFIG := "candidate/></source></get-config></rpc"
+	GET_CONFIG := "candidate"
 
 	driver, err := netconf.NewDriver(
 		"192.168.69.230",
 		options.WithAuthNoStrictKey(),
 		options.WithAuthUsername("lab"),
 		options.WithAuthPassword("lab123"),
-		options.WithPort(22),
+		options.WithPort(830),
 		options.WithTransportType("standard"),
+		options.WithNetconfForceSelfClosingTags(),
 	)
 
 	if err != nil {
