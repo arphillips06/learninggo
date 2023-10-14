@@ -2,11 +2,17 @@ package main
 
 import (
 	"fmt"
+	"reflect"
+	"regexp"
 
 	"github.com/scrapli/scrapligo/driver/netconf"
 	"github.com/scrapli/scrapligo/driver/opoptions"
 	"github.com/scrapli/scrapligo/driver/options"
 )
+
+type RPCResult struct {
+	Result string
+}
 
 type ShowArp struct {
 	ArpTableInformation struct {
@@ -53,6 +59,7 @@ func createOpenDriver() (*netconf.Driver, error) {
 func main() {
 
 	filterString := `<get-arp-table-information/>`
+
 	driver, err := createOpenDriver()
 	if err != nil {
 		fmt.Println(err)
@@ -61,11 +68,18 @@ func main() {
 	defer driver.Close()
 
 	rpc := filterString
+
 	request, err := driver.RPC(opoptions.WithFilter(rpc))
+
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	fmt.Println(request)
+	rc1 := regexp.MustCompile(">( 2).*")
+	request.Result = rc1.ReplaceAllString(request.Result, ">")
+
+	rc2 := regexp.MustCompile("( ).*<")
+	request.Result = rc2.ReplaceAllString(request.Result, "<")
+	fmt.Println(reflect.TypeOf(request))
 
 }

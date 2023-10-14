@@ -1,0 +1,6 @@
+- name: lab.bng
+  ip: 192.168.69.230
+  cmds:
+     - <get-software-information><brief/></get-software-information>
+     - <get-arp-table-information></get-arp-table-information>
+     - <get-route-information></get-route-information>
